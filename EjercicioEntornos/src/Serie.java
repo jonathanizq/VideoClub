@@ -1,5 +1,5 @@
 import java.io.*;
-public class Serie {
+public class Serie implements Entregable{
 	BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
 	private String titulo;
 	private int numTemp;
@@ -54,6 +54,44 @@ public class Serie {
 		this.creador = creador;
 	}
 	
+	public void pedirDatos() throws IOException {
+		char resp;
+		do {
+			System.out.println("TITULO: ");
+			titulo = leer.readLine();
+		} while(titulo.length()==0);
+		do {
+			System.out.println("NUMERO DE TEMPORADAS: ");
+			numTemp = Integer.parseInt(leer.readLine());
+		} while(numTemp<=0);
+		do { 
+			System.out.println("HA ENTREGADO LA PELICULA?");
+			resp = leer.readLine().toUpperCase().charAt(0);
+		} while(resp != 'S' && resp != 'N');
+		if(resp=='S')
+			entregado = true;
+		else
+			entregado = false;
+		System.out.println("GENERO: ");
+		genero = leer.readLine();
+		System.out.println("CREADOR: ");
+		creador = leer.readLine();
+	}
+	
+	public void mostrarDatos() {
+		String resp;
+		System.out.println("TITULO: "+titulo);
+		System.out.println("TEMPORADAS: "+numTemp);
+		if(entregado==true)
+			resp="SI";
+		else
+			resp="NO";
+		System.out.println("ENTREGADO? "+resp);
+		System.out.println("GENERO: "+genero);
+		System.out.println("CREADOR: "+creador);
+		
+	}
+	
 	public void entregar() {
 		entregado = true;
 	}
@@ -63,7 +101,7 @@ public class Serie {
 	public boolean isEntregado() {
 		return entregado;
 	}
-	public boolean compareTo(Serie s) {
+	/*public boolean compareTo(Serie s) {
 		
-	}
+	}*/
 }
